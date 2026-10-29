@@ -1,0 +1,16 @@
+name = "ez-attendance-mail"
+main = "index.js"
+compatibility_date = "2026-10-29"
+
+[vars]
+APP_ORIGIN = "https://danieloculus0-bot.github.io"
+APP_HOSTNAME = "danieloculus0-bot.github.io"
+
+# CLOUDFlARE NATIVE EMAIL OPTION:
+# On Cloudflare Workers Paid, uncomment to use Cloudflare Email Sending:
+# [[send_email]]
+# name = "EMAIL"
+# Then verify your domain and set FROM_EMAIL and HR_EMAIL as Worker secrets.
+#
+# FREE-TIER ALTERNATIVE:
+# Keep the binding commented and supply RESEND_API_KEY as a secret.
