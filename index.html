@@ -109,6 +109,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 </div>
 <div id="online-connector" hidden><p class="hint" data-i="onlineHelp">HR receives your notice and you receive an automatic email receipt. No email login needed.</p><div id="captcha" style="margin-top:14px"></div></div>
 </div>
+<details style="margin:0 0 18px;border:1px solid #d5e2ec;border-radius:8px;padding:12px 15px">
+<summary data-i="helpTitle" style="font-weight:700;cursor:pointer">How to connect in 2 steps</summary>
+<p class="hint" data-i="helpDesktop">Desktop: Choose My email app, enter the HR address once, and press Send inside Outlook/Gmail.</p>
+<p class="hint" data-i="helpPhone">Phone: Open this site, choose My email app, and press Send in your phone email app.</p>
+<p class="hint" data-i="helpCloud">Cloudflare: Your administrator connects the service once. Employees then select Online and submit without signing in.</p>
+</details>
 <div id="status" class="status" role="status" aria-live="polite"></div>
 <button class="send" id="send" type="submit" data-i="openDraft">Open email to send</button>
 <p class="hint" data-i="footnote">No SMS. Contact your supervisor directly for emergencies.</p>
@@ -124,6 +130,14 @@ fr:{subtitle:'Avis de présence des employés',intro:'Informez les RH de votre p
 ar:{subtitle:'إشعار حضور الموظف',intro:'أبلغ الموارد البشرية عن حضورك بخطوات بسيطة.',employee:'معلومات الموظف',name:'الاسم الكامل',id:'رقم الموظف',email:'البريد الإلكتروني',phone:'رقم الهاتف',department:'القسم',optional:'(اختياري)',reason:'ما الذي تريد إبلاغ الموارد البشرية به؟',early:'المغادرة مبكرًا',late:'التأخر عن الدوام',absent:'الغياب / الإبلاغ عن غياب',timeoff:'طلب إجازة',other:'أخرى',leaveDate:'تاريخ المغادرة',leaveTime:'وقت المغادرة المتوقع',arriveDate:'تاريخ الوصول',arriveTime:'وقت الوصول المتوقع',absentDate:'تاريخ الغياب',returnDate:'تاريخ العودة المتوقع',startDate:'أول يوم إجازة',endDate:'آخر يوم إجازة',describe:'اشرح الإشعار',wantPto:'هل تريد طلب إجازة مدفوعة (PTO)؟',yes:'نعم',no:'لا',hours:'ساعات الإجازة المدفوعة المطلوبة',ptoInfo:'طلب الإجازة المدفوعة لا يعني الموافقة عليها.',comments:'تعليقات إضافية',privacy:'يرجى عدم إدخال تشخيصات أو معلومات طبية خاصة.',connection:'إرسال الإشعار عبر',method:'طريقة البريد',local:'تطبيق بريدي (Outlook أو Gmail)',online:'الخدمة الإلكترونية (Cloudflare)',inbox:'بريد الموارد البشرية (مرة واحدة لكل جهاز)',localHelp:'سيفتح تطبيق البريد. اضغط إرسال فيه بنفسك. ستُرسل نسخة إليك إذا كان ذلك مدعومًا.',onlineHelp:'ستتلقى الموارد البشرية الإشعار وستصلك رسالة تأكيد. لا تحتاج لتسجيل الدخول.',openDraft:'فتح البريد للإرسال',send:'إرسال الإشعار',footnote:'لا رسائل نصية. للحالات الطارئة اتصل بالمشرف.',inboxMissing:'أدخل بريد الموارد البشرية.',notReady:'الخدمة الإلكترونية غير متصلة. استخدم تطبيق البريد.',readyLocal:'أكمل النموذج وأرسل الرسالة من تطبيق البريد.',readyOnline:'أكمل النموذج. ستصلك رسالة تأكيد بالبريد.',validation:'يرجى إكمال الحقول المطلوبة.',dateError:'تحقق من التواريخ: لا يجوز أن يسبق تاريخ النهاية البداية.',draft:'تم فتح مسودة البريد. اضغط إرسال في التطبيق. لا تؤكد هذه الصفحة التسليم.',sending:'جارٍ الإرسال...',sent:'تم قبول الإشعار. الرقم المرجعي: {ref}. تم إرسال الإيصال.',sentNoReceipt:'تم قبول الإشعار. الرقم المرجعي: {ref}. تعذر إرسال الإيصال.',failed:'تعذر الإرسال. استخدم طريقة الإبلاغ المعتادة.',verify:'يرجى إكمال التحقق البشري.'},
 vi:{subtitle:'Thông báo chấm công của nhân viên',intro:'Thông báo cho phòng Nhân sự chỉ qua vài bước.',employee:'Thông tin nhân viên',name:'Họ và tên',id:'Mã nhân viên',email:'Địa chỉ email',phone:'Số điện thoại',department:'Bộ phận',optional:'(không bắt buộc)',reason:'Bạn muốn thông báo gì cho Nhân sự?',early:'Về sớm',late:'Đến muộn',absent:'Vắng mặt / báo nghỉ',timeoff:'Xin nghỉ phép',other:'Khác',leaveDate:'Ngày về sớm',leaveTime:'Giờ về dự kiến',arriveDate:'Ngày đến',arriveTime:'Giờ đến dự kiến',absentDate:'Ngày vắng mặt',returnDate:'Ngày dự kiến trở lại',startDate:'Ngày nghỉ đầu',endDate:'Ngày nghỉ cuối',describe:'Mô tả thông báo',wantPto:'Bạn có muốn xin dùng giờ nghỉ có lương (PTO)?',yes:'Có',no:'Không',hours:'Số giờ PTO muốn dùng',ptoInfo:'Yêu cầu PTO không có nghĩa là đã được chấp thuận.',comments:'Ghi chú bổ sung',privacy:'Không nhập chẩn đoán hoặc thông tin y tế cá nhân.',connection:'Gửi thông báo bằng',method:'Cách gửi email',local:'Ứng dụng email của tôi (Outlook, Gmail)',online:'Dịch vụ trực tuyến (Cloudflare)',inbox:'Email phòng Nhân sự (nhập một lần trên thiết bị)',localHelp:'Mở ứng dụng email. Bạn phải nhấn Gửi trong ứng dụng đó. Có thể gửi bản sao cho bạn.',onlineHelp:'Nhân sự nhận thông báo và bạn nhận email xác nhận. Không cần đăng nhập.',openDraft:'Mở email để gửi',send:'Gửi thông báo',footnote:'Không gửi SMS. Việc khẩn cấp hãy liên hệ quản lý trực tiếp.',inboxMissing:'Nhập địa chỉ email phòng Nhân sự.',notReady:'Chưa kết nối dịch vụ trực tuyến. Vui lòng dùng ứng dụng email.',readyLocal:'Điền biểu mẫu rồi nhấn Gửi trong ứng dụng email.',readyOnline:'Điền biểu mẫu. Nhân sự và bạn sẽ nhận email.',validation:'Vui lòng điền đúng các mục bắt buộc.',dateError:'Kiểm tra ngày bắt đầu và ngày kết thúc.',draft:'Đã mở bản nháp. Hãy nhấn Gửi trong ứng dụng email. Trang này không xác nhận giao thư.',sending:'Đang gửi...',sent:'Đã chấp nhận thông báo. Mã: {ref}. Đã gửi email xác nhận.',sentNoReceipt:'Đã chấp nhận thông báo. Mã: {ref}. Không gửi được email xác nhận.',failed:'Không gửi được. Hãy dùng quy trình báo nghỉ thông thường.',verify:'Hoàn tất bước xác minh người dùng.'}
 };
+const helpText={
+en:{helpTitle:'How to connect in 2 steps',helpDesktop:'Desktop: Choose My email app, enter the HR address once, and press Send inside Outlook/Gmail.',helpPhone:'Phone: Open this site, choose My email app, and press Send in your phone email app.',helpCloud:'Cloudflare: Your administrator connects the service once. Employees then select Online and submit without signing in.'},
+es:{helpTitle:'Cómo conectar en 2 pasos',helpDesktop:'Computadora: elija Mi correo, escriba el correo de RR. HH. una vez y pulse Enviar en Outlook/Gmail.',helpPhone:'Teléfono: abra esta página, elija Mi correo y pulse Enviar en su aplicación de correo.',helpCloud:'Cloudflare: el administrador conecta el servicio una vez. Después se puede enviar en línea sin iniciar sesión.'},
+fr:{helpTitle:'Connexion en 2 étapes',helpDesktop:'Ordinateur : sélectionnez Mon application courriel, saisissez une fois l’adresse des RH, puis envoyez dans Outlook/Gmail.',helpPhone:'Téléphone : ouvrez cette page, sélectionnez Mon application courriel et envoyez dans votre messagerie.',helpCloud:'Cloudflare : un administrateur connecte le service une seule fois. Les employés peuvent ensuite envoyer sans se connecter.'},
+ar:{helpTitle:'طريقة الربط بخطوتين',helpDesktop:'الكمبيوتر: اختر تطبيق بريدي وأدخل عنوان الموارد البشرية مرة واحدة، ثم اضغط إرسال في Outlook أو Gmail.',helpPhone:'الهاتف: افتح الموقع واختر تطبيق بريدي ثم اضغط إرسال في تطبيق البريد.',helpCloud:'Cloudflare: يربط المسؤول الخدمة مرة واحدة، وبعدها يمكن للموظفين الإرسال دون تسجيل دخول.'},
+vi:{helpTitle:'Kết nối trong 2 bước',helpDesktop:'Máy tính: chọn Ứng dụng email của tôi, nhập email Nhân sự một lần, rồi nhấn Gửi trong Outlook/Gmail.',helpPhone:'Điện thoại: mở trang web, chọn ứng dụng email rồi nhấn Gửi trong ứng dụng.',helpCloud:'Cloudflare: quản trị viên kết nối dịch vụ một lần. Sau đó nhân viên chọn Trực tuyến và gửi không cần đăng nhập.'}
+};
+for(const lang of Object.keys(helpText))Object.assign(translations[lang],helpText[lang]);
 const f=document.getElementById('notice'),status=document.getElementById('status'),method=document.getElementById('method'),button=document.getElementById('send'),hr=document.getElementById('hr-address');
 const config=window.EZ_ATTENDANCE||{},onlineReady=Boolean(config.apiUrl&&config.siteKey);
 let language='en',sentKey='',ref='',busy=false,token='',widget=null,turnstileLoading=false;
@@ -155,8 +169,8 @@ if((d.reason==='timeoff'&&d.endDate<d.startDate)||(d.reason==='absent'&&d.return
 if(method.value==='local'){
 const address=hr.value.trim();if(!validEmail(address)){say('inboxMissing','bad');hr.focus();return}
 try{localStorage.setItem('ez-attendance-hr-inbox',address)}catch(e){}
-const q=new URLSearchParams({cc:d.email,subject:'EZ Attendance: '+names[d.reason]+' - '+d.name,body:details(d)});
-window.location.href='mailto:'+encodeURIComponent(address)+'?'+q.toString();
+const subject='EZ Attendance: '+names[d.reason]+' - '+d.name;
+window.location.href='mailto:'+encodeURIComponent(address).replace('%40','@')+'?cc='+encodeURIComponent(d.email)+'&subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(details(d));
 say('draft');return
 }
 if(!onlineReady){say('notReady','bad');return}if(!token){say('verify','bad');return}
@@ -165,10 +179,10 @@ try{
 const response=await fetch(config.apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,turnstileToken:token})});
 const result=await response.json();if(!response.ok||!result.ok)throw new Error('Delivery failed');
 ref=result.reference||'';say(result.receiptSent?'sent':'sentNoReceipt','good');
-f.reset();fields();['leaveDate','arrivalDate','absenceDate','startDate'].forEach(k=>f.elements[k].value=date());
+f.reset();method.value='online';fields();['leaveDate','arrivalDate','absenceDate','startDate'].forEach(k=>f.elements[k].value=date());
 }catch(e){say('failed','bad')}finally{busy=false;token='';button.disabled=true;if(widget!==null&&window.turnstile)window.turnstile.reset(widget)}
 });
-translate('en');fields();connect();
+if(onlineReady)method.value='online';translate('en');fields();connect();
 })();
 </script>
 </body></html>
