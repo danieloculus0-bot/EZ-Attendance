@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex,nofollow">
+<title>EZ Attendance</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#183047;background:#edf2f7}
+*{box-sizing:border-box}
+body{margin:0}header{background:linear-gradient(120deg,#073756,#102b63);color:#fff;padding:22px 16px 36px}
+.wrap{max-width:780px;margin:auto}.brand{display:flex;align-items:center;gap:15px}
+.logo{font-size:28px;font-weight:900;border:3px solid #fff;border-radius:50%;width:64px;height:64px;display:grid;place-items:center}
+h1{margin:0;font-size:clamp(24px,4vw,36px)}header p{margin:3px 0 0;color:#dceafa}
+.langs{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
+.langs button{padding:9px 12px;border:1px solid #b9cfdf;color:#fff;background:transparent;border-radius:8px;font-weight:650;cursor:pointer}
+.langs button[aria-pressed="true"]{background:#fff;color:#103666}
+main{max-width:780px;margin:-15px auto 36px;padding:0 14px}
+.panel{background:#fff;border-radius:12px;padding:clamp(18px,4vw,34px);box-shadow:0 8px 28px #102e4b22}
+h2{font-size:17px;color:#103968;margin:0 0 16px}
+section{padding:0 0 24px}section+section{padding-top:23px;border-top:1px solid #dce6ee}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+input,select,textarea{font:inherit;color:#152b41;background:#fff;border:1px solid #aebfd0;border-radius:7px;padding:11px;width:100%}
+input[type=radio]{width:auto;accent-color:#09599d}textarea{min-height:77px;resize:vertical}
+.wide{grid-column:1/-1}.muted{font-weight:400;color:#58718a;font-size:13px}
+fieldset{padding:0;margin:0;border:0}legend{font-weight:700;color:#103968;margin-bottom:12px}
+.choices{display:grid;gap:9px}
+.choice{display:flex;align-items:center;gap:10px;border:1px solid #c6d6e4;padding:12px;border-radius:8px;cursor:pointer;font-weight:600}
+.choice:has(input:checked){border-color:#1363a5;background:#eff7fd}
+.letter{display:inline-grid;place-items:center;border-radius:5px;background:#e6eef6;min-width:25px;padding:4px;font-size:13px}
+.follow{background:#f2f6fa;border-radius:9px;padding:17px;margin-top:14px}
+.pto{display:flex;gap:20px}.pto label{display:flex;align-items:center;gap:6px}
+.hint{font-size:13px;line-height:1.5;color:#576e82;margin:10px 0 0}
+.send{border:0;background:#095b9a;color:#fff;font:inherit;font-weight:750;font-size:17px;padding:15px;width:100%;border-radius:8px;cursor:pointer}
+.send:disabled{opacity:.5;cursor:not-allowed}
+.status{background:#e8f2fc;color:#124570;padding:12px 14px;border-radius:8px;margin:18px 0;line-height:1.45}
+.status.good{background:#e6f7ed;color:#125c32}.status.bad{background:#fff0ed;color:#9b291f}
+.connector{background:#eff4fa;border-radius:9px;padding:16px;margin-bottom:18px}
+.connector .grid{align-items:end}.caption{font-size:13px;color:#536e84;text-align:center;margin:22px 12px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #48a0f7;outline-offset:3px}
+[hidden]{display:none!important}
+[dir=rtl] .brand{flex-direction:row-reverse;justify-content:flex-end}
+[dir=rtl] .choice{flex-direction:row-reverse;justify-content:flex-end}
+@media(max-width:570px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.langs button{flex:1 1 auto}}
+</style>
+<script src="config.js"></script>
+</head>
+<body>
+<header><div class="wrap">
+<div class="brand"><div class="logo" aria-hidden="true">EZ</div><div><h1>EZ Attendance</h1><p data-i="subtitle">Employee attendance notification</p></div></div>
+<nav class="langs" aria-label="Language">
+<button type="button" data-lang="en" aria-pressed="true">English</button>
+<button type="button" data-lang="es" aria-pressed="false">Español</button>
+<button type="button" data-lang="fr" aria-pressed="false">Français</button>
+<button type="button" data-lang="ar" aria-pressed="false">العربية</button>
+<button type="button" data-lang="vi" aria-pressed="false">Tiếng Việt</button>
+</nav></div></header>
+<main><div class="panel">
+<p class="hint" data-i="intro">Notify HR about attendance in just a few steps.</p>
+<form id="notice">
+<section><h2 data-i="employee">Employee information</h2><div class="grid">
+<label class="field"><span data-i="name">Full name</span><input name="name" autocomplete="name" maxlength="100" required></label>
+<label class="field"><span data-i="id">Employee number</span><input name="employeeNumber" maxlength="30" required></label>
+<label class="field"><span data-i="email">Email address</span><input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+<label class="field"><span data-i="phone">Phone number</span><input name="phone" type="tel" autocomplete="tel" maxlength="30" required></label>
+<label class="field wide"><span><span data-i="department">Department</span> <span class="muted" data-i="optional">(optional)</span></span><input name="department" maxlength="80"></label>
+</div></section>
+<section><fieldset><legend data-i="reason">What are you notifying HR about?</legend><div class="choices">
+<label class="choice"><input type="radio" name="reason" value="early" required><span class="letter">A</span><span data-i="early">Leaving early</span></label>
+<label class="choice"><input type="radio" name="reason" value="late"><span class="letter">B</span><span data-i="late">Running late</span></label>
+<label class="choice"><input type="radio" name="reason" value="absent"><span class="letter">C</span><span data-i="absent">Absent / calling in</span></label>
+<label class="choice"><input type="radio" name="reason" value="timeoff"><span class="letter">D</span><span data-i="timeoff">Requesting time off</span></label>
+<label class="choice"><input type="radio" name="reason" value="other"><span class="letter">E</span><span data-i="other">Other</span></label>
+</div></fieldset>
+<div id="extra" hidden>
+<div id="for-early" class="follow" hidden><div class="grid">
+<label class="field"><span data-i="leaveDate">Date leaving early</span><input name="leaveDate" type="date" data-visible-required></label>
+<label class="field"><span data-i="leaveTime">Planned departure time</span><input name="leaveTime" type="time" data-visible-required></label></div></div>
+<div id="for-late" class="follow" hidden><div class="grid">
+<label class="field"><span data-i="arriveDate">Arrival date</span><input name="arrivalDate" type="date" data-visible-required></label>
+<label class="field"><span data-i="arriveTime">Expected arrival time</span><input name="arrivalTime" type="time" data-visible-required></label></div></div>
+<div id="for-absent" class="follow" hidden><div class="grid">
+<label class="field"><span data-i="absentDate">Date absent</span><input name="absenceDate" type="date" data-visible-required></label>
+<label class="field"><span><span data-i="returnDate">Expected return date</span> <span class="muted" data-i="optional">(optional)</span></span><input name="returnDate" type="date"></label></div></div>
+<div id="for-timeoff" class="follow" hidden><div class="grid">
+<label class="field"><span data-i="startDate">First day off</span><input name="startDate" type="date" data-visible-required></label>
+<label class="field"><span data-i="endDate">Last day off</span><input name="endDate" type="date" data-visible-required></label></div></div>
+<div id="for-other" class="follow" hidden><label class="field"><span data-i="describe">Describe the notification</span><textarea name="otherDetails" maxlength="700" data-visible-required></textarea></label></div>
+<div id="pto" class="follow" hidden><fieldset><legend data-i="wantPto">Would you like to request PTO?</legend><div class="pto">
+<label><input type="radio" name="pto" value="yes"><span data-i="yes">Yes</span></label>
+<label><input type="radio" name="pto" value="no"><span data-i="no">No</span></label>
+</div></fieldset>
+<label id="hours-wrap" class="field" style="max-width:220px;margin-top:12px" hidden><span data-i="hours">Hours of PTO requested</span><input name="ptoHours" type="number" min="0.25" max="240" step="0.25" inputmode="decimal"></label>
+<p class="hint" data-i="ptoInfo">A PTO request is not an approval.</p>
+</div></div></section>
+<section><label class="field"><span><span data-i="comments">Additional comments</span> <span class="muted" data-i="optional">(optional)</span></span><textarea name="comments" maxlength="1000"></textarea></label>
+<p class="hint" data-i="privacy">Do not enter diagnoses or private medical details.</p></section>
+<section>
+<h2 data-i="connection">Send notification using</h2>
+<div class="connector">
+<label class="field"><span data-i="method">Email connection</span><select id="method">
+<option value="local" data-i="local">My email app (Outlook, Gmail, etc.)</option>
+<option value="online" data-i="online">Online service (Cloudflare)</option></select></label>
+<div id="local-connector">
+<label class="field" style="margin-top:14px"><span data-i="inbox">HR inbox (enter once per device)</span><input id="hr-address" type="email" autocomplete="off" placeholder="hr@example.com"></label>
+<p class="hint" data-i="localHelp">Opens the email app on this device. You must press Send in that app. Your address is copied on the email when supported.</p>
+</div>
+<div id="online-connector" hidden><p class="hint" data-i="onlineHelp">HR receives your notice and you receive an automatic email receipt. No email login needed.</p><div id="captcha" style="margin-top:14px"></div></div>
+</div>
+<div id="status" class="status" role="status" aria-live="polite"></div>
+<button class="send" id="send" type="submit" data-i="openDraft">Open email to send</button>
+<p class="hint" data-i="footnote">No SMS. Contact your supervisor directly for emergencies.</p>
+</section>
+</form></div><p class="caption">EZ Attendance</p></main>
+<script>
+(function(){
+'use strict';
+const translations={
+en:{subtitle:'Employee attendance notification',intro:'Notify HR about attendance in just a few steps.',employee:'Employee information',name:'Full name',id:'Employee number',email:'Email address',phone:'Phone number',department:'Department',optional:'(optional)',reason:'What are you notifying HR about?',early:'Leaving early',late:'Running late',absent:'Absent / calling in',timeoff:'Requesting time off',other:'Other',leaveDate:'Date leaving early',leaveTime:'Planned departure time',arriveDate:'Arrival date',arriveTime:'Expected arrival time',absentDate:'Date absent',returnDate:'Expected return date',startDate:'First day off',endDate:'Last day off',describe:'Describe the notification',wantPto:'Would you like to request PTO?',yes:'Yes',no:'No',hours:'Hours of PTO requested',ptoInfo:'A PTO request is not an approval.',comments:'Additional comments',privacy:'Do not enter diagnoses or private medical details.',connection:'Send notification using',method:'Email connection',local:'My email app (Outlook, Gmail, etc.)',online:'Online service (Cloudflare)',inbox:'HR inbox (enter once per device)',localHelp:'Opens the email app on this device. You must press Send in that app. Your address is copied when supported.',onlineHelp:'HR receives your notice and you receive an automatic email receipt. No email login needed.',openDraft:'Open email to send',send:'Send notification',footnote:'No SMS. Contact your supervisor directly for emergencies.',inboxMissing:'Enter the HR email address to use your email app.',notReady:'Online sending is not connected. Choose My email app, or ask the administrator to set up Cloudflare.',readyLocal:'Complete the form. Your email app will prepare a draft for you to send.',readyOnline:'Complete the form. HR and you will receive an email.',validation:'Complete the required fields correctly.',dateError:'Check the dates. The end date cannot be earlier than the start date.',draft:'Email draft opened. Press Send inside your email app. This page cannot confirm delivery.',sending:'Sending notice...',sent:'HR notification accepted. Reference: {ref}. Email receipt sent.',sentNoReceipt:'HR notification accepted. Reference: {ref}. Employee email receipt could not be sent.',failed:'Could not send. Use your usual attendance reporting method.',verify:'Complete the human verification first.'},
+es:{subtitle:'Aviso de asistencia del empleado',intro:'Informe a Recursos Humanos sobre su asistencia en pocos pasos.',employee:'Datos del empleado',name:'Nombre completo',id:'Número de empleado',email:'Correo electrónico',phone:'Teléfono',department:'Departamento',optional:'(opcional)',reason:'¿Qué desea comunicar a Recursos Humanos?',early:'Salir temprano',late:'Llegar tarde',absent:'Ausente / aviso de falta',timeoff:'Solicitar tiempo libre',other:'Otro',leaveDate:'Fecha de salida',leaveTime:'Hora de salida prevista',arriveDate:'Fecha de llegada',arriveTime:'Hora de llegada prevista',absentDate:'Fecha de ausencia',returnDate:'Fecha prevista de regreso',startDate:'Primer día libre',endDate:'Último día libre',describe:'Describa el aviso',wantPto:'¿Desea solicitar horas pagadas (PTO)?',yes:'Sí',no:'No',hours:'Horas de PTO solicitadas',ptoInfo:'Solicitar PTO no significa que esté aprobado.',comments:'Comentarios adicionales',privacy:'No incluya diagnósticos ni información médica privada.',connection:'Enviar aviso con',method:'Método de correo',local:'Mi correo (Outlook, Gmail, etc.)',online:'Servicio en línea (Cloudflare)',inbox:'Correo de RR. HH. (una vez por dispositivo)',localHelp:'Se abre su aplicación de correo. Debe pulsar Enviar allí. Se le copiará cuando sea posible.',onlineHelp:'RR. HH. recibirá el aviso y usted recibirá un comprobante por correo. No necesita iniciar sesión.',openDraft:'Abrir correo para enviar',send:'Enviar aviso',footnote:'Sin SMS. En emergencias, contacte a su supervisor.',inboxMissing:'Introduzca el correo de RR. HH.',notReady:'El servicio en línea aún no está conectado. Use su aplicación de correo.',readyLocal:'Complete el formulario y envíe el mensaje desde su aplicación de correo.',readyOnline:'Complete el formulario. RR. HH. y usted recibirán correos.',validation:'Complete correctamente los campos obligatorios.',dateError:'Compruebe las fechas de inicio y fin.',draft:'Se abrió el borrador. Pulse Enviar en su aplicación. Esta página no confirma la entrega.',sending:'Enviando...',sent:'Aviso aceptado por RR. HH. Referencia: {ref}. Comprobante enviado.',sentNoReceipt:'Aviso aceptado. Referencia: {ref}. No se pudo enviar el comprobante.',failed:'No se pudo enviar. Utilice el procedimiento habitual.',verify:'Complete la verificación humana.'},
+fr:{subtitle:'Avis de présence des employés',intro:'Informez les RH de votre présence en quelques étapes.',employee:'Informations sur l’employé',name:'Nom complet',id:'Numéro d’employé',email:'Adresse courriel',phone:'Téléphone',department:'Service',optional:'(facultatif)',reason:'Que souhaitez-vous signaler aux RH ?',early:'Partir plus tôt',late:'Arriver en retard',absent:'Absence / signalement',timeoff:'Demander un congé',other:'Autre',leaveDate:'Date du départ',leaveTime:'Heure prévue de départ',arriveDate:'Date d’arrivée',arriveTime:'Heure d’arrivée prévue',absentDate:'Date de l’absence',returnDate:'Date de retour prévue',startDate:'Premier jour de congé',endDate:'Dernier jour de congé',describe:'Décrivez votre avis',wantPto:'Souhaitez-vous demander un congé payé (PTO) ?',yes:'Oui',no:'Non',hours:'Heures de PTO demandées',ptoInfo:'Une demande de PTO ne signifie pas une approbation.',comments:'Commentaires supplémentaires',privacy:'N’indiquez aucun diagnostic ni renseignement médical privé.',connection:'Envoyer avec',method:'Méthode courriel',local:'Mon application courriel (Outlook, Gmail, etc.)',online:'Service en ligne (Cloudflare)',inbox:'Adresse des RH (une seule fois par appareil)',localHelp:'Votre application courriel s’ouvre. Appuyez sur Envoyer dans cette application. Vous serez en copie si possible.',onlineHelp:'Les RH reçoivent votre avis et vous recevez un accusé par courriel. Aucune connexion requise.',openDraft:'Ouvrir le courriel',send:'Envoyer l’avis',footnote:'Pas de SMS. En cas d’urgence, contactez votre responsable.',inboxMissing:'Saisissez l’adresse courriel des RH.',notReady:'L’envoi en ligne n’est pas connecté. Utilisez votre application courriel.',readyLocal:'Remplissez le formulaire, puis envoyez depuis votre application.',readyOnline:'Remplissez le formulaire. Les RH et vous recevrez un courriel.',validation:'Remplissez correctement les champs obligatoires.',dateError:'Vérifiez les dates de début et de fin.',draft:'Brouillon ouvert. Appuyez sur Envoyer dans votre application. Cette page ne confirme pas la livraison.',sending:'Envoi...',sent:'Avis accepté par les RH. Référence : {ref}. Reçu envoyé.',sentNoReceipt:'Avis accepté. Référence : {ref}. Reçu non envoyé.',failed:'Envoi impossible. Utilisez la procédure habituelle.',verify:'Complétez la vérification humaine.'},
+ar:{subtitle:'إشعار حضور الموظف',intro:'أبلغ الموارد البشرية عن حضورك بخطوات بسيطة.',employee:'معلومات الموظف',name:'الاسم الكامل',id:'رقم الموظف',email:'البريد الإلكتروني',phone:'رقم الهاتف',department:'القسم',optional:'(اختياري)',reason:'ما الذي تريد إبلاغ الموارد البشرية به؟',early:'المغادرة مبكرًا',late:'التأخر عن الدوام',absent:'الغياب / الإبلاغ عن غياب',timeoff:'طلب إجازة',other:'أخرى',leaveDate:'تاريخ المغادرة',leaveTime:'وقت المغادرة المتوقع',arriveDate:'تاريخ الوصول',arriveTime:'وقت الوصول المتوقع',absentDate:'تاريخ الغياب',returnDate:'تاريخ العودة المتوقع',startDate:'أول يوم إجازة',endDate:'آخر يوم إجازة',describe:'اشرح الإشعار',wantPto:'هل تريد طلب إجازة مدفوعة (PTO)؟',yes:'نعم',no:'لا',hours:'ساعات الإجازة المدفوعة المطلوبة',ptoInfo:'طلب الإجازة المدفوعة لا يعني الموافقة عليها.',comments:'تعليقات إضافية',privacy:'يرجى عدم إدخال تشخيصات أو معلومات طبية خاصة.',connection:'إرسال الإشعار عبر',method:'طريقة البريد',local:'تطبيق بريدي (Outlook أو Gmail)',online:'الخدمة الإلكترونية (Cloudflare)',inbox:'بريد الموارد البشرية (مرة واحدة لكل جهاز)',localHelp:'سيفتح تطبيق البريد. اضغط إرسال فيه بنفسك. ستُرسل نسخة إليك إذا كان ذلك مدعومًا.',onlineHelp:'ستتلقى الموارد البشرية الإشعار وستصلك رسالة تأكيد. لا تحتاج لتسجيل الدخول.',openDraft:'فتح البريد للإرسال',send:'إرسال الإشعار',footnote:'لا رسائل نصية. للحالات الطارئة اتصل بالمشرف.',inboxMissing:'أدخل بريد الموارد البشرية.',notReady:'الخدمة الإلكترونية غير متصلة. استخدم تطبيق البريد.',readyLocal:'أكمل النموذج وأرسل الرسالة من تطبيق البريد.',readyOnline:'أكمل النموذج. ستصلك رسالة تأكيد بالبريد.',validation:'يرجى إكمال الحقول المطلوبة.',dateError:'تحقق من التواريخ: لا يجوز أن يسبق تاريخ النهاية البداية.',draft:'تم فتح مسودة البريد. اضغط إرسال في التطبيق. لا تؤكد هذه الصفحة التسليم.',sending:'جارٍ الإرسال...',sent:'تم قبول الإشعار. الرقم المرجعي: {ref}. تم إرسال الإيصال.',sentNoReceipt:'تم قبول الإشعار. الرقم المرجعي: {ref}. تعذر إرسال الإيصال.',failed:'تعذر الإرسال. استخدم طريقة الإبلاغ المعتادة.',verify:'يرجى إكمال التحقق البشري.'},
+vi:{subtitle:'Thông báo chấm công của nhân viên',intro:'Thông báo cho phòng Nhân sự chỉ qua vài bước.',employee:'Thông tin nhân viên',name:'Họ và tên',id:'Mã nhân viên',email:'Địa chỉ email',phone:'Số điện thoại',department:'Bộ phận',optional:'(không bắt buộc)',reason:'Bạn muốn thông báo gì cho Nhân sự?',early:'Về sớm',late:'Đến muộn',absent:'Vắng mặt / báo nghỉ',timeoff:'Xin nghỉ phép',other:'Khác',leaveDate:'Ngày về sớm',leaveTime:'Giờ về dự kiến',arriveDate:'Ngày đến',arriveTime:'Giờ đến dự kiến',absentDate:'Ngày vắng mặt',returnDate:'Ngày dự kiến trở lại',startDate:'Ngày nghỉ đầu',endDate:'Ngày nghỉ cuối',describe:'Mô tả thông báo',wantPto:'Bạn có muốn xin dùng giờ nghỉ có lương (PTO)?',yes:'Có',no:'Không',hours:'Số giờ PTO muốn dùng',ptoInfo:'Yêu cầu PTO không có nghĩa là đã được chấp thuận.',comments:'Ghi chú bổ sung',privacy:'Không nhập chẩn đoán hoặc thông tin y tế cá nhân.',connection:'Gửi thông báo bằng',method:'Cách gửi email',local:'Ứng dụng email của tôi (Outlook, Gmail)',online:'Dịch vụ trực tuyến (Cloudflare)',inbox:'Email phòng Nhân sự (nhập một lần trên thiết bị)',localHelp:'Mở ứng dụng email. Bạn phải nhấn Gửi trong ứng dụng đó. Có thể gửi bản sao cho bạn.',onlineHelp:'Nhân sự nhận thông báo và bạn nhận email xác nhận. Không cần đăng nhập.',openDraft:'Mở email để gửi',send:'Gửi thông báo',footnote:'Không gửi SMS. Việc khẩn cấp hãy liên hệ quản lý trực tiếp.',inboxMissing:'Nhập địa chỉ email phòng Nhân sự.',notReady:'Chưa kết nối dịch vụ trực tuyến. Vui lòng dùng ứng dụng email.',readyLocal:'Điền biểu mẫu rồi nhấn Gửi trong ứng dụng email.',readyOnline:'Điền biểu mẫu. Nhân sự và bạn sẽ nhận email.',validation:'Vui lòng điền đúng các mục bắt buộc.',dateError:'Kiểm tra ngày bắt đầu và ngày kết thúc.',draft:'Đã mở bản nháp. Hãy nhấn Gửi trong ứng dụng email. Trang này không xác nhận giao thư.',sending:'Đang gửi...',sent:'Đã chấp nhận thông báo. Mã: {ref}. Đã gửi email xác nhận.',sentNoReceipt:'Đã chấp nhận thông báo. Mã: {ref}. Không gửi được email xác nhận.',failed:'Không gửi được. Hãy dùng quy trình báo nghỉ thông thường.',verify:'Hoàn tất bước xác minh người dùng.'}
+};
+const f=document.getElementById('notice'),status=document.getElementById('status'),method=document.getElementById('method'),button=document.getElementById('send'),hr=document.getElementById('hr-address');
+const config=window.EZ_ATTENDANCE||{},onlineReady=Boolean(config.apiUrl&&config.siteKey);
+let language='en',sentKey='',ref='',busy=false,token='',widget=null,turnstileLoading=false;
+function t(k){return (translations[language]||translations.en)[k]||translations.en[k]||k}
+function say(k,cls){sentKey=k;status.textContent=t(k).replace('{ref}',ref);status.className='status'+(cls?' '+cls:'')}
+function translate(l){language=translations[l]?l:'en';document.documentElement.lang=language;document.documentElement.dir=language==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i]').forEach(x=>x.textContent=t(x.dataset.i));document.querySelectorAll('[data-lang]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.lang===language)));button.textContent=t(method.value==='online'?'send':'openDraft');if(sentKey)say(sentKey,status.classList.contains('good')?'good':status.classList.contains('bad')?'bad':'')}
+function fields(){const r=f.elements.reason.value;document.getElementById('extra').hidden=!r;for(const k of ['early','late','absent','timeoff','other']){const box=document.getElementById('for-'+k);box.hidden=r!==k;box.querySelectorAll('[data-visible-required]').forEach(x=>x.required=r===k)}
+const p=document.getElementById('pto');p.hidden=!['early','absent','timeoff'].includes(r);
+f.querySelectorAll('[name=pto]').forEach(x=>x.required=!p.hidden);
+pto(); }
+function pto(){const yes=!document.getElementById('pto').hidden&&f.elements.pto.value==='yes';document.getElementById('hours-wrap').hidden=!yes;f.elements.ptoHours.required=yes}
+function date(){const d=new Date(),n=x=>String(x).padStart(2,'0');return d.getFullYear()+'-'+n(d.getMonth()+1)+'-'+n(d.getDate())}
+['leaveDate','arrivalDate','absenceDate','startDate'].forEach(k=>f.elements[k].value=date());
+function connect(){const cloud=method.value==='online';document.getElementById('local-connector').hidden=cloud;document.getElementById('online-connector').hidden=!cloud;button.textContent=t(cloud?'send':'openDraft');if(cloud){if(!onlineReady){button.disabled=true;say('notReady','bad')}else{button.disabled=busy||!token;say('readyOnline');initTurnstile()}}else{button.disabled=busy;say('readyLocal')}}
+function initTurnstile(){if(!onlineReady||turnstileLoading||widget!==null)return;turnstileLoading=true;const script=document.createElement('script');script.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';script.async=true;script.onload=function(){widget=window.turnstile.render('#captcha',{sitekey:config.siteKey,callback:function(x){token=x;if(method.value==='online')button.disabled=busy||!x},'expired-callback':function(){token='';button.disabled=true},'error-callback':function(){token='';button.disabled=true}})};script.onerror=function(){say('failed','bad')};document.head.appendChild(script)}
+try{hr.value=localStorage.getItem('ez-attendance-hr-inbox')||''}catch(e){}
+hr.addEventListener('change',function(){try{localStorage.setItem('ez-attendance-hr-inbox',hr.value.trim())}catch(e){}});
+document.querySelectorAll('[data-lang]').forEach(x=>x.addEventListener('click',()=>translate(x.dataset.lang)));
+f.querySelectorAll('[name=reason]').forEach(x=>x.addEventListener('change',fields));f.querySelectorAll('[name=pto]').forEach(x=>x.addEventListener('change',pto));
+method.addEventListener('change',connect);
+function validEmail(s){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s)}
+const names={early:'Leaving early',late:'Running late',absent:'Absent / calling in',timeoff:'Requesting time off',other:'Other attendance notice'};
+function details(d){const specific={early:'Date: '+d.leaveDate+'\nPlanned departure: '+d.leaveTime,late:'Arrival date: '+d.arrivalDate+'\nExpected arrival: '+d.arrivalTime,absent:'Absent date: '+d.absenceDate+'\nExpected return: '+(d.returnDate||'Not supplied'),timeoff:'First day off: '+d.startDate+'\nLast day off: '+d.endDate,other:'Details: '+(d.otherDetails||'')};
+return ['EZ ATTENDANCE NOTIFICATION','Name: '+d.name,'Employee number: '+d.employeeNumber,'Employee email: '+d.email,'Employee phone: '+d.phone,'Department: '+(d.department||'Not provided'),'Reason: '+names[d.reason],specific[d.reason]||'','PTO requested: '+(['early','absent','timeoff'].includes(d.reason)?(d.pto==='yes'?'Yes':'No'):'Not applicable'),...(d.pto==='yes'?['Hours of PTO requested: '+d.ptoHours]:[]),'Comments: '+(d.comments||'None'),'','PTO requests are not approvals.'].join('\n')}
+f.addEventListener('submit',async function(e){
+e.preventDefault();if(busy)return;if(!f.reportValidity()){say('validation','bad');return}
+const d=Object.fromEntries(new FormData(f).entries());
+if((d.reason==='timeoff'&&d.endDate<d.startDate)||(d.reason==='absent'&&d.returnDate&&d.returnDate<d.absenceDate)){say('dateError','bad');return}
+if(method.value==='local'){
+const address=hr.value.trim();if(!validEmail(address)){say('inboxMissing','bad');hr.focus();return}
+try{localStorage.setItem('ez-attendance-hr-inbox',address)}catch(e){}
+const q=new URLSearchParams({cc:d.email,subject:'EZ Attendance: '+names[d.reason]+' - '+d.name,body:details(d)});
+window.location.href='mailto:'+encodeURIComponent(address)+'?'+q.toString();
+say('draft');return
+}
+if(!onlineReady){say('notReady','bad');return}if(!token){say('verify','bad');return}
+busy=true;button.disabled=true;say('sending');
+try{
+const response=await fetch(config.apiUrl,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...d,turnstileToken:token})});
+const result=await response.json();if(!response.ok||!result.ok)throw new Error('Delivery failed');
+ref=result.reference||'';say(result.receiptSent?'sent':'sentNoReceipt','good');
+f.reset();fields();['leaveDate','arrivalDate','absenceDate','startDate'].forEach(k=>f.elements[k].value=date());
+}catch(e){say('failed','bad')}finally{busy=false;token='';button.disabled=true;if(widget!==null&&window.turnstile)window.turnstile.reset(widget)}
+});
+translate('en');fields();connect();
+})();
+</script>
+</body></html>
